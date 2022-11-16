@@ -7,15 +7,17 @@ IOExpanderDriver *ioExpanderDriver;
 
 void setup()
 {
-  ioExpanderDriver = new IOExpanderDriver(0x20, 0x21);
+  Serial.begin(9600);
+  Serial.println("Starting...");
+
+  ioExpanderDriver = IOExpanderDriver::getInstance();
+
   pinMode(LED_PIN, OUTPUT);
-  delay(1000);
 }
 
 void loop()
 {
-  digitalWrite(LED_PIN, HIGH);
-  delay(1000);
-  digitalWrite(LED_PIN, LOW);
-  delay(1000);
-}
+  Serial.println("Button 8 value: " + String(ioExpanderDriver->isButtonPressed(Button8)));
+  Serial.println("Button 7 value: " + String(ioExpanderDriver->isButtonPressed(Button7)));
+  delay(10);
+};

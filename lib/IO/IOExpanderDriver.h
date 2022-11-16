@@ -1,18 +1,18 @@
 #include <PCF8574.h>
 
-enum RelayNumber
+enum Relay
 {
-  Relay1 = 0,
-  Relay2,
-  Relay3,
-  Relay4,
-  Relay5,
-  Relay6,
-  Relay7,
+  DayLightRelay = 0,
+  LowBeenRelay,
+  HighBeenRelay,
+  LeftSignalRelay,
+  RightSignalRelay,
+  CutCurrentRelay,
+  StartMotorRelay,
   Relay8,
 };
 
-enum ButtonNumber
+enum Button
 {
   Button1 = 0,
   Button2,
@@ -27,12 +27,13 @@ enum ButtonNumber
 class IOExpanderDriver
 {
 private:
+  static IOExpanderDriver *instance;
   PCF8574 *buttonExpander;
   PCF8574 *relayExpander;
 
 public:
-  IOExpanderDriver(int buttonAddress, int relayAddress);
-  void turnOnRelay(RelayNumber relayNumber);
-  void turnOffRelay(RelayNumber relayNumber);
-  bool isButtonPressed(ButtonNumber buttonNumber);
+  static IOExpanderDriver *getInstance();
+  void turnOnRelay(Relay relayNumber);
+  void turnOffRelay(Relay relayNumber);
+  bool isButtonPressed(Relay buttonNumber);
 };
