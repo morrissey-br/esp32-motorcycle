@@ -1,3 +1,4 @@
+#pragma once
 #include <PCF8574.h>
 
 enum Relay
@@ -14,13 +15,13 @@ enum Relay
 
 enum Button
 {
-  Button1 = 0,
-  Button2,
-  Button3,
-  Button4,
-  Button5,
-  Button6,
-  Button7,
+  LeftButton1 = 0,
+  LeftButton2,
+  LeftButton3,
+  RightButton1,
+  RightButton2,
+  Cluch,
+  FrontBreak,
   Button8,
 };
 
@@ -28,12 +29,13 @@ class IOExpanderDriver
 {
 private:
   static IOExpanderDriver *instance;
+  IOExpanderDriver(int buttonExpanderAddress, int relayExpanderAddress);
   PCF8574 *buttonExpander;
   PCF8574 *relayExpander;
 
 public:
   static IOExpanderDriver *getInstance();
-  void turnOnRelay(Relay relayNumber);
-  void turnOffRelay(Relay relayNumber);
-  bool isButtonPressed(Relay buttonNumber);
+  void turnOnRelay(Relay relay);
+  void turnOffRelay(Relay relay);
+  bool isButtonPressed(Button button);
 };

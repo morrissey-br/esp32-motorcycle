@@ -18,20 +18,20 @@ Engine *Engine::getInstance()
 
 void Engine::runStartMotor()
 {
-  ioExpanderDriver->turnOnRelay(Relay1);
+  ioExpanderDriver->turnOnRelay(StartMotorRelay);
 }
 
 void Engine::stopStartMotor()
 {
-  ioExpanderDriver->turnOffRelay(Relay1);
+  ioExpanderDriver->turnOffRelay(StartMotorRelay);
 }
 
 void Engine::allowCurrent()
 {
-  ioExpanderDriver->turnOnRelay(Relay2);
+  ioExpanderDriver->turnOffRelay(CutCurrentRelay);
 }
 
 void Engine::cutCurrent()
 {
-  ioExpanderDriver->turnOffRelay(Relay2);
+  ioExpanderDriver->turnOnRelay(CutCurrentRelay);
 }

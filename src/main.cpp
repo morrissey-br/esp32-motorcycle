@@ -1,23 +1,27 @@
 #include <Arduino.h>
-#include <IOExpanderDriver.h>
+#include <Engine.h>
+#include <Lights.h>
 
 #define LED_PIN 12
 
-IOExpanderDriver *ioExpanderDriver;
+Engine *engine;
+Lights *lights;
 
 void setup()
 {
   Serial.begin(9600);
   Serial.println("Starting...");
 
-  ioExpanderDriver = IOExpanderDriver::getInstance();
+  engine = Engine::getInstance();
+  lights = Lights::getInstance();
 
   pinMode(LED_PIN, OUTPUT);
 }
 
 void loop()
 {
-  Serial.println("Button 8 value: " + String(ioExpanderDriver->isButtonPressed(Button8)));
-  Serial.println("Button 7 value: " + String(ioExpanderDriver->isButtonPressed(Button7)));
-  delay(10);
+  engine->runStartMotor();
+  delay(1000);
+  engine->stopStartMotor();
+  delay(1000);
 };

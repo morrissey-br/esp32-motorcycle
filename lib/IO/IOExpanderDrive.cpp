@@ -1,46 +1,60 @@
 #include <IOExpanderDriver.h>
 #include <PCF8574.h>
 
-IOExpanderDriver::IOExpanderDriver(int buttonAddress, int relayAddress)
+#define BUTTON_EXPANDER_ADDRESS 0x20
+#define RELAY_EXPANDER_ADDRESS 0x21
+
+IOExpanderDriver *IOExpanderDriver::instance = nullptr;
+
+IOExpanderDriver::IOExpanderDriver(int buttonExpanderAddress, int relayExpanderAddress)
 {
-  buttonExpander = new PCF8574(buttonAddress);
-  relayExpander = new PCF8574(relayAddress);
+  buttonExpander = new PCF8574(buttonExpanderAddress);
+  relayExpander = new PCF8574(relayExpanderAddress);
   // Iniciar e configurar todos os pinos do expansor de botões como entradas
-  buttonExpander->pinMode(Button1, INPUT);
-  buttonExpander->pinMode(Button2, INPUT);
-  buttonExpander->pinMode(Button3, INPUT);
-  buttonExpander->pinMode(Button4, INPUT);
-  buttonExpander->pinMode(Button5, INPUT);
-  buttonExpander->pinMode(Button6, INPUT);
-  buttonExpander->pinMode(Button7, INPUT);
+  buttonExpander->pinMode(LeftButton1, INPUT);
+  buttonExpander->pinMode(LeftButton2, INPUT);
+  buttonExpander->pinMode(LeftButton3, INPUT);
+  buttonExpander->pinMode(RightButton1, INPUT);
+  buttonExpander->pinMode(RightButton2, INPUT);
+  buttonExpander->pinMode(Cluch, INPUT);
+  buttonExpander->pinMode(FrontBreak, INPUT);
   buttonExpander->pinMode(Button8, INPUT);
   buttonExpander->begin();
   buttonExpander->digitalReadAll();
 
   // Iniciar e configurar todos os pinos do expansor de relés como saídas
-  relayExpander->pinMode(Relay1, OUTPUT);
-  relayExpander->pinMode(Relay2, OUTPUT);
-  relayExpander->pinMode(Relay3, OUTPUT);
-  relayExpander->pinMode(Relay4, OUTPUT);
-  relayExpander->pinMode(Relay5, OUTPUT);
-  relayExpander->pinMode(Relay6, OUTPUT);
-  relayExpander->pinMode(Relay7, OUTPUT);
+  relayExpander->pinMode(DayLightRelay, OUTPUT);
+  relayExpander->pinMode(LowBeenRelay, OUTPUT);
+  relayExpander->pinMode(HighBeenRelay, OUTPUT);
+  relayExpander->pinMode(LeftSignalRelay, OUTPUT);
+  relayExpander->pinMode(RightSignalRelay, OUTPUT);
+  relayExpander->pinMode(CutCurrentRelay, OUTPUT);
+  relayExpander->pinMode(StartMotorRelay, OUTPUT);
   relayExpander->pinMode(Relay8, OUTPUT);
   relayExpander->begin();
   relayExpander->digitalWriteAll({HIGH, HIGH, HIGH, HIGH, HIGH, HIGH, HIGH, HIGH}); // Necessário somente no módulo de relé sem inversor
 }
 
-void IOExpanderDriver::turnOnRelay(RelayNumber relayNumber)
+IOExpanderDriver *IOExpanderDriver::getInstance()
 {
-  relayExpander->digitalWrite(relayNumber, LOW);
+  if (instance == nullptr)
+  {
+    instance = new IOExpanderDriver(BUTTON_EXPANDER_ADDRESS, RELAY_EXPANDER_ADDRESS);
+  }
+  return instance;
 }
 
-void IOExpanderDriver::turnOffRelay(RelayNumber relayNumber)
+void IOExpanderDriver::turnOnRelay(Relay relay)
 {
-  relayExpander->digitalWrite(relayNumber, HIGH);
+  relayExpander->digitalWrite(relay, LOW);
 }
 
-bool IOExpanderDriver::isButtonPressed(ButtonNumber buttonNumber)
+void IOExpanderDriver::turnOffRelay(Relay relay)
 {
-  return buttonExpander->digitalRead(buttonNumber) == LOW;
+  relayExpander->digitalWrite(relay, HIGH);
+}
+
+bool IOExpanderDriver::isButtonPressed(Button button)
+{
+  return buttonExpander->digitalRead(button) == LOW;
 }
