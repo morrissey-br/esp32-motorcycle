@@ -1,15 +1,15 @@
-#include <IOExpanderDriver.h>
 #include <PCF8574.h>
+#include <drivers/IOExpanderDriver.h>
 
 #define BUTTON_EXPANDER_ADDRESS 0x20
 #define RELAY_EXPANDER_ADDRESS 0x21
 
 IOExpanderDriver *IOExpanderDriver::instance = nullptr;
 
-IOExpanderDriver::IOExpanderDriver(int buttonExpanderAddress, int relayExpanderAddress)
+IOExpanderDriver::IOExpanderDriver()
 {
-  buttonExpander = new PCF8574(buttonExpanderAddress);
-  relayExpander = new PCF8574(relayExpanderAddress);
+  buttonExpander = new PCF8574(BUTTON_EXPANDER_ADDRESS);
+  relayExpander = new PCF8574(RELAY_EXPANDER_ADDRESS);
   // Iniciar e configurar todos os pinos do expansor de botões como entradas
   buttonExpander->pinMode(LeftButton1, INPUT);
   buttonExpander->pinMode(LeftButton2, INPUT);
@@ -39,7 +39,7 @@ IOExpanderDriver *IOExpanderDriver::getInstance()
 {
   if (instance == nullptr)
   {
-    instance = new IOExpanderDriver(BUTTON_EXPANDER_ADDRESS, RELAY_EXPANDER_ADDRESS);
+    instance = new IOExpanderDriver();
   }
   return instance;
 }

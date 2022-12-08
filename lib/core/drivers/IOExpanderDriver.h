@@ -27,11 +27,11 @@ enum Button
 
 class IOExpanderDriver
 {
-private:
+
   static IOExpanderDriver *instance;
-  IOExpanderDriver(int buttonExpanderAddress, int relayExpanderAddress);
-  PCF8574 *buttonExpander;
-  PCF8574 *relayExpander;
+  PCF8574 *buttonExpander = nullptr;
+  PCF8574 *relayExpander = nullptr;
+  IOExpanderDriver();
 
 public:
   static IOExpanderDriver *getInstance();

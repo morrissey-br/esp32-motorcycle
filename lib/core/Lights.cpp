@@ -1,19 +1,8 @@
 #include <Lights.h>
 
-Lights *Lights::instance = nullptr;
-
-Lights::Lights(IOExpanderDriver *ioExpanderDriver)
+Lights::Lights()
 {
-  this->ioExpanderDriver = ioExpanderDriver;
-}
-
-Lights *Lights::getInstance()
-{
-  if (instance == nullptr)
-  {
-    instance = new Lights(IOExpanderDriver::getInstance());
-  }
-  return instance;
+  ioExpanderDriver = IOExpanderDriver::getInstance();
 }
 
 void Lights::turnOnDayLight()

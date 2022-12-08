@@ -1,19 +1,8 @@
 #include <Engine.h>
 
-Engine *Engine::instance = nullptr;
-
-Engine::Engine(IOExpanderDriver *ioExpanderDriver)
+Engine::Engine()
 {
-  this->ioExpanderDriver = ioExpanderDriver;
-}
-
-Engine *Engine::getInstance()
-{
-  if (instance == nullptr)
-  {
-    instance = new Engine(IOExpanderDriver::getInstance());
-  }
-  return instance;
+  ioExpanderDriver = IOExpanderDriver::getInstance();
 }
 
 void Engine::runStartMotor()

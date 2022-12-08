@@ -1,15 +1,12 @@
 #pragma once
-#include <IOExpanderDriver.h>
+#include <drivers/IOExpanderDriver.h>
 
 class Lights
 {
-private:
-  static Lights *instance;
   IOExpanderDriver *ioExpanderDriver;
-  Lights(IOExpanderDriver *ioExpanderDriver);
 
 public:
-  static Lights *getInstance();
+  Lights();
   void turnOnDayLight();
   void turnOffDayLight();
 };

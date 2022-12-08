@@ -1,15 +1,12 @@
 #pragma once
-#include <IOExpanderDriver.h>
+#include <drivers/IOExpanderDriver.h>
 
 class Engine
 {
-private:
-  static Engine *instance;
   IOExpanderDriver *ioExpanderDriver;
-  Engine(IOExpanderDriver *ioExpanderDriver);
 
 public:
-  static Engine *getInstance();
+  Engine();
   void runStartMotor();
   void stopStartMotor();
   void allowCurrent();
