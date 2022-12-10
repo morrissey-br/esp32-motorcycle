@@ -3,13 +3,13 @@
 
 enum Relay
 {
-  DayLightRelay = 0,
+  StartMotorRelay = 0,
+  CutCurrentRelay,
+  DayLightRelay,
   LowBeenRelay,
   HighBeenRelay,
   LeftSignalRelay,
   RightSignalRelay,
-  CutCurrentRelay,
-  StartMotorRelay,
   Relay8,
 };
 
@@ -18,9 +18,9 @@ enum Button
   LeftButton1 = 0,
   LeftButton2,
   LeftButton3,
+  Cluch,
   RightButton1,
   RightButton2,
-  Cluch,
   FrontBreak,
   Button8,
 };
