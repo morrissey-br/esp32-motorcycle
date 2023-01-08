@@ -10,19 +10,19 @@ enum Relay
   HighBeenRelay,
   LeftSignalRelay,
   RightSignalRelay,
-  Relay8,
+  NeutralLightRelay,
 };
 
 enum Button
 {
   LeftButton1 = 0,
   LeftButton2,
-  LeftButton3,
-  Cluch,
   RightButton1,
   RightButton2,
+  Cluch,
+  LeftButton3,
   FrontBreak,
-  Button8,
+  Neutral,
 };
 
 class IOExpanderDriver

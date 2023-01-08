@@ -20,7 +20,7 @@ IOExpanderDriver::IOExpanderDriver()
   buttonExpander->pinMode(RightButton1, INPUT_PULLUP);
   buttonExpander->pinMode(RightButton2, INPUT_PULLUP);
   buttonExpander->pinMode(FrontBreak, INPUT_PULLUP);
-  buttonExpander->pinMode(Button8, INPUT_PULLUP);
+  buttonExpander->pinMode(Neutral, INPUT_PULLUP);
   buttonExpander->begin();
   buttonExpander->digitalReadAll();
 
@@ -32,7 +32,7 @@ IOExpanderDriver::IOExpanderDriver()
   relayExpander->pinMode(HighBeenRelay, OUTPUT);
   relayExpander->pinMode(LeftSignalRelay, OUTPUT);
   relayExpander->pinMode(RightSignalRelay, OUTPUT);
-  relayExpander->pinMode(Relay8, OUTPUT);
+  relayExpander->pinMode(NeutralLightRelay, OUTPUT);
   relayExpander->begin();
   relayExpander->digitalWriteAll({HIGH, HIGH, HIGH, HIGH, HIGH, HIGH, HIGH, HIGH}); // Necessário somente no módulo de relé sem inversor
 }

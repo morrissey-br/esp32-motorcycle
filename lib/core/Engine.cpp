@@ -24,3 +24,8 @@ void Engine::cutCurrent()
 {
   ioExpanderDriver->turnOnRelay(CutCurrentRelay);
 }
+
+bool Engine::isInNeutral()
+{
+  return ioExpanderDriver->isButtonPressed(Neutral);
+}

@@ -11,4 +11,5 @@ public:
   void stopStartMotor();
   void allowCurrent();
   void cutCurrent();
+  bool isInNeutral();
 };

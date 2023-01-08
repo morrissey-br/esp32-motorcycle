@@ -9,4 +9,14 @@ public:
   Lights();
   void turnOnDayLight();
   void turnOffDayLight();
+  void turnOnLowBeen();
+  void turnOffLowBeen();
+  void turnOnHighBeen();
+  void turnOffHighBeen();
+  void turnOnLeftSignal();
+  void turnOffLeftSignal();
+  void turnOnRightSignal();
+  void turnOffRightSignal();
+  void turnOnNeutralLight();
+  void turnOffNeutralLight();
 };
